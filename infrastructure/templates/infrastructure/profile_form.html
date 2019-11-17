@@ -1,0 +1,35 @@
+{%include 'index.html'%}
+<style>
+body  {
+  text-align: center;
+  vertical-align: middle;
+ }
+p * { vertical-align: middle; 
+	font-size : 20px ;
+	}​ 
+
+</style>
+<form method="post" enctype="multipart/form-data">
+	<h3>Your Picture</h3>
+	<img src="{{ form.instance.avatar_thumbnail.url }}" />
+	{% csrf_token %}
+    {%for item in form%}
+    <p>
+    	{%if  item.label != 'Tags'%}
+    	{{item.label}} 
+    	{{item}} 
+    	<p>
+    		{%if item.label == 'Username'%}
+    			*Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+    		{%endif%}
+    	</p>
+    	{%else%}
+    		{{item.label}} {{item}} 
+    		<!--{{form.instance.tags.subject_tag.all}}
+    		{{subject_form}} !-->
+    		{{tag_form}}
+    	{%endif%}
+    </p>
+    {%endfor%}
+    <input type="submit" value="Update">
+</form>

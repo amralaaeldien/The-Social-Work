@@ -1,0 +1,6 @@
+{%include 'index.html'%}
+{%for org in orgs.all%}
+<h1>
+<a href="{% url 'infrastructure:org-detail' slug=org.slug %}">{{org.name}}</a>
+</h1>
+{%endfor%}

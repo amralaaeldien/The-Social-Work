@@ -1,0 +1,4 @@
+{%include 'index.html'%}
+{%for tag in tags%}
+	<h1><a href="{% url 'infrastructure:tag-user-view' tag_name=tag.name%}">{{tag}}</h1>
+{%endfor%}

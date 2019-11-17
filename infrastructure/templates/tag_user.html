@@ -1,0 +1,4 @@
+{%include 'index.html'%}
+{%for user in users.all%}
+<h1><a href="{% url 'infrastructure:display-profile' slug=user.slug %}">{{user.username}}</a></h1>
+{%endfor%}

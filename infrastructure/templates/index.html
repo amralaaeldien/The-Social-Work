@@ -1,0 +1,25 @@
+<style>
+	body {
+		text-align: center;
+ 	 	vertical-align: middle;
+	}
+	p *{
+		vertical-align: middle;
+	}
+</style>
+<body>
+	<h1><a href="{% url 'infrastructure:edit-user-profile' slug=request.user.slug %}">Edit Profile</a>
+	</h1>
+	<h1>
+		<a href="{% url 'infrastructure:display-profile' slug=request.user.slug%} ">Display Profile</a>
+	</h1>
+	<h1>
+		<a href="{% url 'infrastructure:org-create' %}">Create Organization</a>
+	</h1>
+	<h1>
+		<a href="{% url 'infrastructure:user-orgs-view' slug=request.user.slug%}"> Your Organizations </a>
+	</h1>
+{%block content%}
+{%endblock%}
+</body>
+<hr>

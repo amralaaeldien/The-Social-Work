@@ -1,0 +1,597 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"in",
+				"infrastructure"
+			],
+			[
+				"sni",
+				"snippet_detail"
+			],
+			[
+				"vie",
+				"as_view"
+			],
+			[
+				"view",
+				"view_name"
+			],
+			[
+				"req",
+				"request"
+			],
+			[
+				"User",
+				"UserSerializer"
+			],
+			[
+				"high",
+				"highlight"
+			],
+			[
+				"ge",
+				"get_lexer_by_name"
+			],
+			[
+				"serial",
+				"serializer_class"
+			],
+			[
+				"res",
+				"rest_framework"
+			],
+			[
+				"get",
+				"get_object"
+			],
+			[
+				"J",
+				"JSONParser"
+			],
+			[
+				"Seriali",
+				"SnippetSerializer"
+			],
+			[
+				"Sni",
+				"SnippetSerializer"
+			],
+			[
+				"csrf",
+				"csrf_exempt"
+			],
+			[
+				"sty",
+				"style"
+			],
+			[
+				"valida",
+				"validated_data"
+			],
+			[
+				"LAN",
+				"LANGUAGE_CHOICES"
+			],
+			[
+				"Qu",
+				"QuestionAdmin"
+			],
+			[
+				"asse",
+				"assertContains"
+			],
+			[
+				"test",
+				"TestCase"
+			],
+			[
+				"assert",
+				"assertQuerysetEqual"
+			],
+			[
+				"create",
+				"create_question"
+			],
+			[
+				"ques",
+				"question_text"
+			],
+			[
+				"pub",
+				"pub_date"
+			],
+			[
+				"q",
+				"Question"
+			],
+			[
+				"templa",
+				"template_name"
+			],
+			[
+				"que",
+				"question_id"
+			],
+			[
+				"question",
+				"question_id"
+			],
+			[
+				"Htt",
+				"HttpResponseRedirect"
+			],
+			[
+				"sele",
+				"selected_choice"
+			],
+			[
+				"tr",
+				"try\tTry/Except"
+			],
+			[
+				"questi",
+				"question_id"
+			],
+			[
+				"add",
+				"add_a_circle"
+			],
+			[
+				"de",
+				"description"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "infrastructure/models.py",
+			"settings":
+			{
+				"buffer_size": 535,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "infrastructure/signals.py",
+			"settings":
+			{
+				"buffer_size": 417,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "infrastructure/apps.py",
+			"settings":
+			{
+				"buffer_size": 150,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "infrastructure/__init__.py",
+			"settings":
+			{
+				"buffer_size": 63,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"dja",
+				"Set Syntax: HTML (Django)"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/F/Desktop/PIM/products_and_categories/models.py",
+		"/F/Desktop/json.json",
+		"/F/Desktop/PIM/products_and_categories/serializers.py",
+		"/C/Users/connect/Desktop/tutorial/tutorial/manage.py",
+		"/C/Users/connect/Desktop/test.py",
+		"/C/Users/connect/Downloads/patient_drug.sql",
+		"/C/Program Files/Git/mingw64/share/doc/git-doc/git-push.html",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui/1.2.0/package.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-oauth/1.1.15/web.browser-legacy/packages/accounts-oauth.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-oauth/1.1.15/web.browser/oauth_client.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-oauth/1.1.15/web.browser/oauth_common.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/client/templates/aboutUs.html",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.3.0/web.cordova/login_buttons.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/.meteor/packages",
+		"/C/Users/connect/Desktop/[FreeCoursesOnline.Me] Pluralsight - Python – Beyond the Basics/course-info.json",
+		"/C/Users/connect/Desktop/hello.py",
+		"/C/Users/connect/Downloads/[FreeCourseSite.com] Udemy - Complete Regular Expressions Bootcamp – Go from zero to hero/02 Regular Expressions Basics  I/009 Excercise for Section 2.html",
+		"/C/Users/connect/Downloads/case33_assignment.sql",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/server/fixtures.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.3.0/web.browser/login_buttons.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui/1.2.0/web.browser/login_buttons.less",
+		"/C/Users/connect/Desktop/mysite/polls/views.py",
+		"/C/Users/connect/Desktop/[FreeTutorials.Us] tweetme-django/FreeTutorials.us.html",
+		"/C/Users/connect/Downloads/airLine.sql",
+		"/C/Users/connect/Desktop/test coming back/help-er/package.json",
+		"/C/Users/connect/Desktop/accounts-ui-unstyled/1.3.0/web.browser/login_buttons.import.less",
+		"/C/Users/connect/Desktop/accounts-ui-unstyled/1.3.0/web.cordova/login_buttons.import.less",
+		"/C/Users/connect/Desktop/accounts-ui-unstyled/1.3.0/web.cordova/login_buttons.js",
+		"/C/Users/connect/Desktop/num/help-er/.meteor/local/build/programs/server/packages/check.js",
+		"/C/Users/connect/Desktop/help-er/client/main.css",
+		"/C/Users/connect/Desktop/myfinal/lib/permissions.js",
+		"/C/Users/connect/Desktop/num/help-er/client/layout.html",
+		"/C/Users/connect/Desktop/help-er/client/templates/application/not_found.html",
+		"/C/Users/connect/Desktop/help-er/client/templates/application/layout.html",
+		"/C/Users/connect/Desktop/help-er/client/main.html",
+		"/C/Users/connect/Desktop/help-er/server/publications.js",
+		"/C/Users/connect/Desktop/help-er/server/fixtures.js",
+		"/C/Users/connect/Desktop/help-er/server/main.js",
+		"/C/Users/connect/Desktop/help-er/lib/router.js",
+		"/C/Users/connect/Desktop/help-er/lib/collections/tags.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/package.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/package.json",
+		"/C/Users/connect/Desktop/fire/Microscope-master/.meteor/release",
+		"/C/help-er/README.markdown",
+		"/C/Users/connect/Downloads/lab4.sql",
+		"/C/Users/connect/Desktop/fire/Microscope-master/.meteor/local/build/programs/web.browser/app/app.js",
+		"/C/Users/connect/Desktop/num/help-er/client/templates/HelperPostsManual.html",
+		"/C/Users/connect/Desktop/num/help-er/.meteor/local/build/programs/web.browser/packages/iron_router.js",
+		"/C/Users/connect/Desktop/help-er/.meteor/packages",
+		"/C/Users/connect/Desktop/help-er/client/templates/posts/post_item.js",
+		"/C/Users/connect/Desktop/help-er/client/templates/posts/post_edit.js",
+		"/C/Users/connect/Desktop/help-er/client/templates/posts/post_item.html",
+		"/C/Users/connect/Desktop/help-er/README.markdown",
+		"/C/Users/connect/Desktop/help-er/package.json",
+		"/C/Users/connect/Desktop/project/server/fixtures.js",
+		"/C/Users/connect/Desktop/project/lib/router.js",
+		"/C/Users/connect/Desktop/hello_world/package.json",
+		"/C/Users/connect/Desktop/myfinal/server/fixtures.js",
+		"/C/Users/connect/Desktop/myfinal/lib/router.js",
+		"/C/Users/connect/Desktop/myfinal/client/main.js",
+		"/C/Users/connect/Desktop/num/help-er/client/main.html",
+		"/C/Users/connect/Desktop/project/client/templates/application/layout.html",
+		"/C/Users/connect/Desktop/project/client/templates/application/layout.js",
+		"/C/Users/connect/Desktop/num/help-er/.meteor/local/build/programs/web.browser/packages/check.js",
+		"/C/Users/connect/Desktop/num/help-er/server/fixtures.js",
+		"/C/Users/connect/Desktop/myfinal/node_modules/accounts/lib/login.js",
+		"/C/Users/connect/Desktop/myfinal/node_modules/accounts/package.json",
+		"/C/Users/connect/Desktop/myfinal/server/publications.js",
+		"/C/Users/connect/Desktop/myfinal/server/main.js",
+		"/C/Users/connect/Desktop/project/server/publications.js",
+		"/C/Users/connect/Desktop/project/package.json",
+		"/C/Users/connect/Desktop/myfinal/package.json",
+		"/C/Users/connect/Desktop/meteor-devel/README.md",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/.meteor/local/resolver-result-cache.json",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-meteor-developer/1.4.0/web.browser-legacy/packages/accounts-meteor-developer.js",
+		"/C/Users/connect/Desktop/accounts-ui-unstyled/1.3.0/web.browser/login_buttons.js",
+		"/C/Users/connect/Desktop/test coming back 2/meteor/packages/accounts-ui-unstyled/package.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/web.browser/accounts_ui.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.3.0/web.cordova/login_buttons.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.3.0/web.browser/login_buttons.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/web.browser/login_buttons.html",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/os.json",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/web.cordova.json",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/web.browser.json",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/package.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/web.cordova/login_buttons.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/web.browser/login_buttons_dropdown.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/web.browser/login_buttons_dialogs.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/web.browser/login_buttons.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/.meteor/versions",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/.meteor/release",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/.meteor/platforms",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.4.1/web.browser/login_buttons.import.less",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/README.markdown",
+		"/C/Users/connect/Desktop/help-er/client/helpers/config.js",
+		"/C/Users/connect/Desktop/help-er/client/helpers/handlebars.js",
+		"/C/Users/connect/Desktop/help-er/client/main.js",
+		"/C/Users/connect/Desktop/help-er/client/templates/application/layout.js",
+		"/C/Users/connect/Desktop/help-er/client/templates/posts/post_edit.html",
+		"/C/Users/connect/Desktop/help-er/client/templates/notifications/notifications.js",
+		"/C/Users/connect/Desktop/help-er/client/templates/includes/header.js",
+		"/C/Users/connect/Desktop/help-er/client/templates/aboutUs.html",
+		"/C/Users/connect/Desktop/help-er/client/templates/posts/tags.html",
+		"/C/Users/connect/Desktop/help-er/client/templates/posts/tag.html",
+		"/C/Users/connect/Desktop/help-er/client/templates/includes/header.html",
+		"/C/Users/connect/Desktop/help-er/lib/permissions.js",
+		"/C/Users/connect/Desktop/help-er/lib/collections/notifications.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/.meteor/local/build/programs/web.browser/packages/accounts-base.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.4.1/web.cordova.json",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.4.1/web.browser.json",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.4.1/package.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/help-er/package.json",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/.meteor/cordova-plugins",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/package-lock.json",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.3.0/web.cordova/login_buttons_single.js",
+		"/C/Users/connect/Desktop/test coming back 2/help-er/packages/accounts-ui-unstyled/1.3.0/web.browser/accounts_ui.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.3.0/web.browser/login_buttons_dialogs.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.3.0/web.browser/login_buttons_session.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.3.0/web.browser/accounts_ui.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.3.0/isopack.json",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.3.0/package.js",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.3.0/web.browser/login_buttons.html",
+		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.3.0/web.browser/login_buttons.import.less",
+		"/C/Users/connect/AppData/Local/.meteor/package-metadata/v2.0.1/packages.data.db",
+		"/C/Users/connect/Desktop/test coming back/help-er/package-lock.json",
+		"/C/Users/connect/OneDrive/Pictures/Tota/Ana L'error.html",
+		"/C/Users/connect/Desktop/num/help-er/client/main.js",
+		"/C/Users/connect/Desktop/project/myapp/.meteor/packages"
+	],
+	"find":
+	{
+		"height": 172.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "infrastructure/models.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 535,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								102,
+								102
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "infrastructure/signals.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 417,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								256,
+								256
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "infrastructure/apps.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 150,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								42,
+								62
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "infrastructure/__init__.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 63,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								62,
+								62
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 172.0
+	},
+	"input":
+	{
+		"height": 172.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "the-social-work.sublime-project",
+	"replace":
+	{
+		"height": 340.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 188.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

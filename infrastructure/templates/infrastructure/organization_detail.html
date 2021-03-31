@@ -1,0 +1,23 @@
+{% extends 'index.html'%}
+{%block content%}
+<img src="{{ object.avatar_thumbnail.url }}" >
+<h3><a href="{% url 'infrastructure:org-edit' slug=object.slug %}">Edit</a></h3>
+<h1>Name : {{ object.name }}</h1>
+<p>Bio : {{ object.bio }}</p>
+<p>Location : {{ object.location }}</p>
+<p>Contact Information : {{ object.contact_information }}</p>
+<p>Verification Status : 
+
+	{% if object.verified %}
+		verified ✅
+
+	{%else%}
+		not verified ❌
+	{%endif%}
+	
+</p>
+<h4>Tags</h4>
+{%for tag in object.tags.all%}
+<p> <a href="{% url 'infrastructure:tag-user-view' tag_name=tag.name %}">{{tag}}</a> </p>
+{%endfor%}
+{%endblock%}

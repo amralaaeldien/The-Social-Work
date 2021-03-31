@@ -2,6 +2,7 @@
 {%block content%}
 <img src="{{ object.avatar_thumbnail.url }}" >
 <h3><a href="{% url 'infrastructure:org-edit' slug=object.slug %}">Edit</a></h3>
+
 <h1>Name : {{ object.name }}</h1>
 <p>Bio : {{ object.bio }}</p>
 <p>Location : {{ object.location }}</p>

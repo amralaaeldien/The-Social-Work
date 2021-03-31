@@ -1,5 +1,6 @@
 {%extends 'index.html'%}
 {%block content%}
+
 {%for org in orgs.all%}
 <h1>
 <a href="{% url 'infrastructure:org-detail' slug=org.slug %}">{{org.name}}</a>

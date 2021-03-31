@@ -12,6 +12,9 @@ urlpatterns = [
 	path('tags/', views.TagsView, name='tags-view'),
 	path('org/create', views.OrganizationCreate.as_view(), name = 'org-create'),
 	path('org/<slug>', views.OrganizationDetail.as_view(), name='org-detail'),
+<<<<<<< HEAD
 	path('org/<slug>/edit', views.OrganizationUpdate.as_view(), name='org-edit'),
 
+=======
+>>>>>>> f786d6fc849949f2bb349fcd363a95766bfc96c4
 ]

@@ -4,11 +4,8 @@ from .models import Profile
 # Create your views here.
 #from .forms import SubjectTagForm
 from django.core import exceptions
-<<<<<<< HEAD
 from django.http import HttpResponse, HttpResponseRedirect
 
-=======
->>>>>>> f786d6fc849949f2bb349fcd363a95766bfc96c4
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Profile, Tag, Organization
 from django.views.generic.detail import DetailView
@@ -44,7 +41,6 @@ class ProfileUpdate(UpdateView):
 		base_qs = super(ProfileUpdate, self).get_queryset()
 		return base_qs.filter(username=self.request.user.username)
 
-<<<<<<< HEAD
 class OrganizationUpdate(UpdateView):
 	model = Organization
 	fields = [
@@ -68,8 +64,7 @@ class OrganizationUpdate(UpdateView):
 		self.object.save()
 		return super().form_valid(form)
 
-=======
->>>>>>> f786d6fc849949f2bb349fcd363a95766bfc96c4
+
 class ProfileDetail(DetailView):
 	model = Profile
 
@@ -78,12 +73,8 @@ class ProfileDetail(DetailView):
 
 def TagUserView(request, tag_name):
 	users = Tag.objects.get(name=tag_name).profile_set
-<<<<<<< HEAD
 	orgs = Tag.objects.get(name=tag_name).organization_set
 	return render(request, 'tag_user.html', { 'users' : users, 'orgs' : orgs})
-=======
-	return render(request, 'tag_user.html', { 'users' : users})
->>>>>>> f786d6fc849949f2bb349fcd363a95766bfc96c4
 
 def TagsView(request):
 	tags = Tag.objects.filter(verified=True).all()

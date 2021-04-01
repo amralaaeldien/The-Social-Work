@@ -1,0 +1,16 @@
+{%extends 'base.html'%}
+{%block content%}
+<h3>{{post.content}}</h3>
+<hr>
+<h2>Comments</h2>
+{%for comment in comments%}
+<h2>"{{comment.content}}" by {{comment.publisher_user}}</h2>
+{%endfor%}
+<h1>Submit a comment</h1>
+<form method='post' action="{%url 'infrastructure:comments-creation' id=post.id%}">
+	{% csrf_token %}
+
+	<input type="text" name="comment">
+	<input type="submit" name="submit comment">
+</form>
+{%endblock%}

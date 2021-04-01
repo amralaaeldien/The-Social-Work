@@ -21,6 +21,7 @@ class SubjectTag(models.Model):
 	tags = models.ManyToManyField(Tag, related_name='subject_tag')
 	def __str__(self):
 		return self.name
+
 		
 class Profile(AbstractUser):
 	#user = models.OneToOneField(User, parent_link=True, on_delete=models.CASCADE)
@@ -35,6 +36,7 @@ class Profile(AbstractUser):
 	tags = models.ManyToManyField(Tag)
 	contact_information = models.TextField()
 	verified = models.BooleanField(default=False)
+
 
 	def __str__(self):
 		return self.slug
@@ -73,8 +75,31 @@ class Organization(models.Model):
 	def save(self, *args, **kwargs):
 		if not self.slug:
 			self.slug = slugify(self.name)
-
 		super(Organization, self).save(*args, **kwargs)
 
 	def get_absolute_url(self):
 		return reverse('infrastructure:org-detail', kwargs={'slug': self.slug})
+
+
+class Post(models.Model):
+	content = models.TextField()
+	created_at = models.DateTimeField(auto_now_add=True)
+	publisher_user = models.ForeignKey(Profile, related_name='user_post', on_delete=models.CASCADE, null = True,
+		blank = True)
+	publisher_org = models.ForeignKey(Organization, related_name='org_post', on_delete=models.CASCADE, null = True,
+		blank = True)
+
+	def get_absolute_url(self):
+		return reverse('infrastructure:post-detail', kwargs={'id': self.id})
+
+
+class Comment(models.Model):
+	content = models.TextField()
+	created_at = models.DateTimeField(auto_now_add=True)
+	publisher_user = models.ForeignKey(Profile, related_name='user_comment', on_delete=models.CASCADE, null = True,
+		blank = True)
+	publisher_org = models.ForeignKey(Organization, related_name='org_comment', on_delete=models.CASCADE, null=True,
+		blank = True)
+	post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+
+

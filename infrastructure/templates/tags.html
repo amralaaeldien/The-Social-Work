@@ -1,4 +1,4 @@
-{%extends 'index.html'%}
+{%extends 'base.html'%}
 {%block content%}
 {%for tag in tags%}
 	<h1><a href="{% url 'infrastructure:tag-user-view' tag_name=tag.name%}">{{tag}}</h1>

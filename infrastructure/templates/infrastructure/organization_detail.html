@@ -1,4 +1,4 @@
-{% extends 'index.html'%}
+{%extends 'base.html'%}
 {%block content%}
 <img src="{{ object.avatar_thumbnail.url }}" >
 <h3><a href="{% url 'infrastructure:org-edit' slug=object.slug %}">Edit</a></h3>
@@ -20,5 +20,19 @@
 <h4>Tags</h4>
 {%for tag in object.tags.all%}
 <p> <a href="{% url 'infrastructure:tag-user-view' tag_name=tag.name %}">{{tag}}</a> </p>
+{%endfor%}
+
+<hr>
+<h1>Submit a post</h1>
+<form id='form1' method="post" action="{% url 'infrastructure:publish-post-org' slug=object.slug %}">
+{% csrf_token %}
+	<input type="text" name='text'>
+	<input type="submit" name="submit">
+</form>
+<hr>
+<h1>Posts</h1>
+{%for post in object.org_post.all%}
+<h4><a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}</a></h4>
+<hr>
 {%endfor%}
 {%endblock%}

@@ -13,6 +13,11 @@ urlpatterns = [
 	path('org/create', views.OrganizationCreate.as_view(), name = 'org-create'),
 	path('org/<slug>', views.OrganizationDetail.as_view(), name='org-detail'),
 	path('org/<slug>/edit', views.OrganizationUpdate.as_view(), name='org-edit'),
+	path('publish_post/user/<slug>', views.PublishPostView, name='publish-post-user'),
+	path('publish_post/org/<slug>', views.PublishPostView, name='publish-post-org'),
+	path('post/<id>', views.PostView, name='post-detail'),
+	path('comments/<id>', views.CommentsCreation, name='comments-creation'),
+
 
 
 ]

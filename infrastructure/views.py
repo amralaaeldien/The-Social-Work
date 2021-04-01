@@ -7,13 +7,16 @@ from django.core import exceptions
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .models import Profile, Tag, Organization
+from .models import Profile, Tag, Organization, Post, Comment
 from django.views.generic.detail import DetailView
+from django.urls import reverse
 from .forms import TagForm
 
 def results(request):
 	slug = request.user.slug
-	return render(request, 'index.html', {'slug' : slug})
+	user_posts = Post.objects.all().exclude(publisher_user__isnull = True)
+	org_posts = Post.objects.all().exclude(publisher_org__isnull=True)
+	return render(request, 'index.html', {'slug' : slug, 'user_posts': user_posts, 'org_posts': org_posts})
 
 class ProfileUpdate(UpdateView):
 	model = Profile
@@ -108,3 +111,26 @@ def UserOrgsView(request, slug):
 	print('heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeey')
 	print(Profile.objects.get(slug=slug).organization_set)
 	return render(request, 'user_orgs.html', { 'orgs' : orgs})
+
+def PublishPostView(request, slug):
+	content = request.POST.get("text")
+	path = request.get_full_path()
+	if 'publish_post/user/' in path :
+		Post.objects.create(content=content, publisher_user=request.user)
+		return HttpResponseRedirect(reverse('infrastructure:display-profile', args=(slug,)))
+	else :
+		publisher_org = Organization.objects.get(slug = slug)
+		Post.objects.create(content=content, publisher_org=publisher_org)
+		return HttpResponseRedirect(reverse('infrastructure:org-detail', args=(slug,)))
+
+def PostView(request, id):
+	post = Post.objects.get(id=id)
+	comments = Comment.objects.filter(post=post)
+	return render(request, 'post_detail.html', {'post': post, 'comments': comments})
+
+def CommentsCreation(request, id):
+	post = Post.objects.get(id = id)
+	Comment.objects.create(content = request.POST.get('comment'), publisher_user=request.user, post = post)
+	return HttpResponseRedirect(reverse('infrastructure:post-detail', args=(post.id,)))
+
+

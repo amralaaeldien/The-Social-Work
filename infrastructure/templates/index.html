@@ -4,14 +4,30 @@
 <h1>Posts from users</h1>
 <h3>
 	{%for post in user_posts%}
-<p>"<a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}</a>" by {{post.publisher_user.slug}}</p>
+	
+		{%if post.id not in ids%}
+
+				<a href="{%url 'infrastructure:upvote' id=post.id%}">Up vote</a>
+		{%else%}
+
+
+				<a href="{%url 'infrastructure:unvote' id=post.id%}">Unvote</a>
+
+		{%endif%}
+<p>"<a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}</a>" 
+	by 
+	<a href="{%url 'infrastructure:display-profile' slug=post.publisher_user.slug%}">{{post.publisher_user.slug}}</a>
+</p>
 {%endfor%}
 
 </h3>
 <h1>Posts from Organizations</h1>
 <h3>
 	{%for post in org_posts%}
-	<p>"<a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}"</a> by {{post.publisher_org.slug}}</p>
+	<p>"<a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}"</a>
+		 by 
+		<a href="{%url 'infrastructure:org-detail' slug=post.publisher_org.slug%}">{{post.publisher_org.name}}</a>
+	</p>
 	{%endfor%}
 </h3>
 {%endblock%}

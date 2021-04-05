@@ -22,11 +22,13 @@
 {%endfor%}
 <hr>
 <h1>Submit a post</h1>
+{% if request.user == object %}
 <form id='form1' method="post" action="{% url 'infrastructure:publish-post-user' slug=request.user.slug %}">
 {% csrf_token %}
 	<input type="text" name='text'>
 	<input type="submit" name="submit">
 </form>
+{%endif%}
 <hr>
 <h1>Posts</h1>
 {%for post in object.user_post.all%}

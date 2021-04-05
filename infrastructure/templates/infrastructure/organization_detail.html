@@ -1,7 +1,10 @@
 {%extends 'base.html'%}
 {%block content%}
 <img src="{{ object.avatar_thumbnail.url }}" >
+
+{% if request.user in object.moderators.all %}
 <h3><a href="{% url 'infrastructure:org-edit' slug=object.slug %}">Edit</a></h3>
+{%endif%}
 
 <h1>Name : {{ object.name }}</h1>
 <p>Bio : {{ object.bio }}</p>
@@ -24,11 +27,13 @@
 
 <hr>
 <h1>Submit a post</h1>
-<form id='form1' method="post" action="{% url 'infrastructure:publish-post-org' slug=object.slug %}">
-{% csrf_token %}
-	<input type="text" name='text'>
-	<input type="submit" name="submit">
-</form>
+{%if request.user in object.moderators.all %}
+	<form id='form1' method="post" action="{% url 'infrastructure:publish-post-org' slug=object.slug %}">
+	{% csrf_token %}
+		<input type="text" name='text'>
+		<input type="submit" name="submit">
+	</form>
+{%endif%}
 <hr>
 <h1>Posts</h1>
 {%for post in object.org_post.all%}

@@ -7,16 +7,25 @@ from django.core import exceptions
 from django.http import HttpResponse, HttpResponseRedirect
 
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .models import Profile, Tag, Organization, Post, Comment
+from .models import Profile, Tag, Organization, Post, Comment, Voters
 from django.views.generic.detail import DetailView
 from django.urls import reverse
 from .forms import TagForm
+from django.db.models import Q
+
 
 def results(request):
 	slug = request.user.slug
 	user_posts = Post.objects.all().exclude(publisher_user__isnull = True)
+	voted_users = Voters.objects.filter(voter = request.user)
+	print(voted_users)
+	ids = []
+	for vote in voted_users:
+		ids.append(vote.post.id)
+	print(ids)
+	print('hooooooooooooooooooooooooooooooooooooooooooo')
 	org_posts = Post.objects.all().exclude(publisher_org__isnull=True)
-	return render(request, 'index.html', {'slug' : slug, 'user_posts': user_posts, 'org_posts': org_posts})
+	return render(request, 'index.html', {'ids' : ids,'slug' : slug, 'user_posts': user_posts, 'org_posts': org_posts})
 
 class ProfileUpdate(UpdateView):
 	model = Profile
@@ -134,3 +143,74 @@ def CommentsCreation(request, id):
 	return HttpResponseRedirect(reverse('infrastructure:post-detail', args=(post.id,)))
 
 
+#def PostUpView(request, id):
+#	post = Post.objects.get(id = id)
+#	if(request.user not in post.get_voters):
+#		post.up_vote()
+#		post.save()
+	#path1 = request.get_full_path()
+	#path2 = post.get_aboslute_url()
+	#if ('/accounts/' in path) and ('/orgs' in path):
+	#	return HttpResponseRedirect(reverse('infrastructure:', args=(post.id,)))
+#	previous_url = request.META.get('HTTP_REFERER')
+#	post.add_voter(request.user)
+#	print(post.get_voters)
+#	print(post.get_votes())
+#	print('hello')
+#	return HttpResponseRedirect(previous_url)
+
+def PostUpView(request, id):
+	post = Post.objects.get(id = id)
+	users = Voters.objects.filter(post = post)
+	if not users:
+		Voters.objects.create(post = post, voter = request.user)
+	print('mother')
+	print(users)
+	empty_list = []
+	#for user in users:
+		#empty_list.append(user['voter'])
+	for user in users:
+		empty_list.append(user.voter.slug)
+	if request.user.slug not in empty_list:
+		print('print empty_list')
+		print(empty_list)
+		post.up_vote()
+		Voters.objects.create(post = post, voter = request.user)
+		post.save()
+	else:
+		print(empty_list)
+
+	print('hello')
+	print(post.get_votes())
+	previous_url = request.META.get('HTTP_REFERER')
+
+	return HttpResponseRedirect(previous_url)
+
+
+
+def PostUnvoteView(request, id):
+#	post = Post.objects.get(id = id)
+#	if post.get_votes() > 0 :
+#		post.down_vote()
+#	post.save()
+#	post.voters_list.remove(request.user)
+#	print(post.get_voters())
+#	print(post.get_votes())
+#	print('hello')
+	previous_url = request.META.get('HTTP_REFERER')
+	#Voters.objects.create(post = post, voter = request.user)
+#	return HttpResponseRedirect(previous_url)
+	#post_user = Post.objects.get(id = id).posts_of_voters.all()
+	post = Post.objects.get(id = id)
+	t=post.posts_of_voters
+	print('nonononon')
+	Voters.objects.filter(Q(post_id= id) & Q(voter=request.user)).delete()
+	post.down_vote()
+	post.save()
+	print(post.get_votes())
+
+	#users = Voters.objects.filter(post = post)
+	#if request.user in post_user:
+	#	post.down_vote()
+	#	post_user.filter(Q(id=id) & Q(publisher_user=request.user)).delete()
+	return HttpResponseRedirect(previous_url)

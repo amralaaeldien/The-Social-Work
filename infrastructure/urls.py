@@ -16,8 +16,9 @@ urlpatterns = [
 	path('publish_post/user/<slug>', views.PublishPostView, name='publish-post-user'),
 	path('publish_post/org/<slug>', views.PublishPostView, name='publish-post-org'),
 	path('post/<id>', views.PostView, name='post-detail'),
-	path('comments/<id>', views.CommentsCreation, name='comments-creation'),
-
+	path('comments/<id>', views.CommentsCreation, name='comments-creation'), #the id here is for the post that is having the comment
+	path('upvote/<id>', views.PostUpView, name='upvote'),
+	path('unvote/<id>', views.PostUnvoteView, name='unvote'),
 
 
 ]

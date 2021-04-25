@@ -19,6 +19,9 @@ urlpatterns = [
 	path('comments/<id>', views.CommentsCreation, name='comments-creation'), #the id here is for the post that is having the comment
 	path('upvote/<id>', views.PostUpView, name='upvote'),
 	path('unvote/<id>', views.PostUnvoteView, name='unvote'),
+	path('order_by_time', views.OrderingByTime, name='order-by-time'),
+	path('order_by_votes', views.OrderingByVotes, name='order-by-votes')
+
 
 
 ]

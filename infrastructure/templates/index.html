@@ -1,33 +1,41 @@
 {%extends 'base.html'%}
 
 {%block content%}
+<h1>
+<a href="{%url 'infrastructure:order-by-time'%}">Recent posts</a> ||
+<a href="{%url 'infrastructure:order-by-votes'%}">Highest votes</a>
+</h1>
 <h1>Posts from users</h1>
 <h3>
 	{%for post in user_posts%}
 	
 		{%if post.id not in ids%}
-
-				<a href="{%url 'infrastructure:upvote' id=post.id%}">Up vote</a>
+				<a href="{%url 'infrastructure:upvote' id=post.id%}">Up vote ({{post.get_votes}})</a>
 		{%else%}
-
-
-				<a href="{%url 'infrastructure:unvote' id=post.id%}">Unvote</a>
+				<a href="{%url 'infrastructure:unvote' id=post.id%}">Unvote ({{post.get_votes}})</a>
 
 		{%endif%}
-<p>"<a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}</a>" 
+"<a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}</a>" 
 	by 
 	<a href="{%url 'infrastructure:display-profile' slug=post.publisher_user.slug%}">{{post.publisher_user.slug}}</a>
-</p>
+	<br>
+	<br>
 {%endfor%}
-
 </h3>
 <h1>Posts from Organizations</h1>
 <h3>
 	{%for post in org_posts%}
-	<p>"<a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}"</a>
+			{%if post.id not in ids%}
+				<a href="{%url 'infrastructure:upvote' id=post.id%}">Up vote ({{post.get_votes}})</a>
+		{%else%}
+				<a href="{%url 'infrastructure:unvote' id=post.id%}">Unvote ({{post.get_votes}})</a>
+
+		{%endif%}
+	"<a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}"</a>
 		 by 
 		<a href="{%url 'infrastructure:org-detail' slug=post.publisher_org.slug%}">{{post.publisher_org.name}}</a>
-	</p>
+		<br>
+		<br>
 	{%endfor%}
 </h3>
 {%endblock%}

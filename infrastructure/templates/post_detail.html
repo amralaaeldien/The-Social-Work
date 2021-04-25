@@ -1,5 +1,14 @@
 {%extends 'base.html'%}
 {%block content%}
+		{%if post.id not in ids%}
+
+				<a href="{%url 'infrastructure:upvote' id=post.id%}">Up vote ({{post.get_votes}})</a>
+		{%else%}
+
+
+				<a href="{%url 'infrastructure:unvote' id=post.id%}">Unvote ({{post.get_votes}})</a>
+
+		{%endif%}
 <h3>{{post.content}}</h3>
 <hr>
 <h2>Comments</h2>

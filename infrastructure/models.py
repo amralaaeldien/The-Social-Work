@@ -74,7 +74,10 @@ class Organization(models.Model):
 
 	def save(self, *args, **kwargs):
 		if not self.slug:
-			self.slug = slugify(self.name)
+			if slugify(self.name):
+				self.slug = slugify(self.name)
+			else:
+				self.slug = self.name.replace(" ", "")
 		super(Organization, self).save(*args, **kwargs)
 
 	def get_absolute_url(self):

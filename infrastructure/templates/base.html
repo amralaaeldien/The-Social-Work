@@ -18,6 +18,7 @@
 </style>
 
 <body>
+	{% if request.user.is_authenticated %}
 	<h1><a href="{% url 'infrastructure:edit-user-profile' slug=request.user.slug %}">Edit Profile</a>
 	</h1>
 	<h1>
@@ -29,6 +30,7 @@
 	<h1>
 		<a href="{% url 'infrastructure:user-orgs-view' slug=request.user.slug%}"> Your Organizations </a>
 	</h1>
+	{%endif%}
 	<h1>
 		<a href="{% url 'infrastructure:index'%}"> Index </a>
 	</h1>

@@ -1,5 +1,6 @@
 {%extends 'base.html'%}
 {%block content%}
+	{%if request.user.is_authenticated%}
 		{%if post.id not in ids%}
 
 				<a href="{%url 'infrastructure:upvote' id=post.id%}">Up vote ({{post.get_votes}})</a>
@@ -9,12 +10,24 @@
 				<a href="{%url 'infrastructure:unvote' id=post.id%}">Unvote ({{post.get_votes}})</a>
 
 		{%endif%}
+	{%endif%}
+{% if user %}
+<h6>By : <a href="{% url 'infrastructure:display-profile' slug=user.slug%}">{{user.slug}}</a></h6>
+<img src="{{ user.avatar_thumbnail.url }}" >
+
+{%elif org%}
+<h6>By : <a href="{% url 'infrastructure:org-detail' slug=org.slug%}">{{org.slug}}</a></h6>
+<img src="{{ org.avatar_thumbnail.url }}" >
+
+{%endif%}
 <h3>{{post.content}}</h3>
 <hr>
 <h2>Comments</h2>
 {%for comment in comments%}
-<h2>"{{comment.content}}" by {{comment.publisher_user}}</h2>
+<h2>"{{comment.content}}" by {{comment.publisher_user}} <img src="{{ comment.publisher_user.avatar_thumbnail.url }}" >
+ </h2>
 {%endfor%}
+{%if request.user.is_authenticated%}
 <h1>Submit a comment</h1>
 <form method='post' action="{%url 'infrastructure:comments-creation' id=post.id%}">
 	{% csrf_token %}
@@ -22,4 +35,5 @@
 	<input type="text" name="comment">
 	<input type="submit" name="submit comment">
 </form>
+{%endif%}
 {%endblock%}

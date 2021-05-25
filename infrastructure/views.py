@@ -15,35 +15,38 @@ from django.db.models import Q
 
 
 def results(request):
-	slug = request.user.slug
-	user_posts = Post.objects.all().exclude(publisher_user__isnull = True)
-	voted_users = Voters.objects.filter(voter = request.user)
 	ids = []
-	for vote in voted_users:
-		ids.append(vote.post.id)
-
+	slug = None
+	if request.user.is_authenticated:
+		slug = request.user.slug
+		voted_users = Voters.objects.filter(voter = request.user)
+		for vote in voted_users:
+			ids.append(vote.post.id)		
+	user_posts = Post.objects.all().exclude(publisher_user__isnull = True)
 	org_posts = Post.objects.all().exclude(publisher_org__isnull=True)
 	return render(request, 'index.html', {'ids' : ids,'slug' : slug, 'user_posts': user_posts, 'org_posts': org_posts})
 
 def OrderingByTime(request):
-	slug = request.user.slug
+	slug = None
+	ids = []
+	if request.user.is_authenticated:
+		slug = request.user.slug
+		voted_users = Voters.objects.filter(voter = request.user)
+		for vote in voted_users:
+			ids.append(vote.post.id)
 	user_posts = Post.objects.all().exclude(publisher_user__isnull = True).order_by("-created_at")
 	org_posts = Post.objects.all().exclude(publisher_org__isnull=True).order_by("-created_at")
-	voted_users = Voters.objects.filter(voter = request.user)
-	ids = []
-	for vote in voted_users:
-		ids.append(vote.post.id)
-
 	return render(request, 'index.html', {'ids' : ids,'slug' : slug, 'user_posts': user_posts, 'org_posts': org_posts})
 
 def OrderingByVotes(request):
-	slug = request.user.slug
+	slug =None
+	ids=[]
+	if request.user.is_authenticated:
+		slug = request.user.slug
+		voted_users = Voters.objects.filter(voter = request.user)
+		for vote in voted_users:
+			ids.append(vote.post.id)
 	user_posts = Post.objects.all().exclude(publisher_user__isnull = True).order_by('-votes')
-	voted_users = Voters.objects.filter(voter = request.user)
-	ids = []
-	for vote in voted_users:
-		ids.append(vote.post.id)
-
 	org_posts = Post.objects.all().exclude(publisher_org__isnull=True).order_by('-votes')
 	return render(request, 'index.html', {'ids' : ids,'slug' : slug, 'user_posts': user_posts, 'org_posts': org_posts})
 
@@ -155,13 +158,21 @@ def PublishPostView(request, slug):
 
 def PostView(request, id):
 	post = Post.objects.get(id=id)
+	if post.publisher_user :
+		user = post.publisher_user
+		org = None
+	elif post.publisher_org :
+		org = post.publisher_org
+		user = None
 	comments = Comment.objects.filter(post=post)
 	votes = post.get_votes()
-	voted_users = Voters.objects.filter(voter = request.user)
 	ids = []
-	for vote in voted_users:
-		ids.append(vote.post.id)
-	return render(request, 'post_detail.html', {'post': post, 'comments': comments, 'votes': votes, 'ids': ids})
+
+	if request.user.is_authenticated:
+		voted_users = Voters.objects.filter(voter = request.user)
+		for vote in voted_users:
+			ids.append(vote.post.id)
+	return render(request, 'post_detail.html', {'post': post, 'comments': comments, 'votes': votes, 'ids': ids, 'user': user, 'org':org})
 
 def CommentsCreation(request, id):
 	post = Post.objects.get(id = id)

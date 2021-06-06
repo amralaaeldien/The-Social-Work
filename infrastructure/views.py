@@ -107,6 +107,18 @@ class ProfileDetail(DetailView):
 	def get_object(self):
 		return Profile.objects.get(slug = self.kwargs.get('slug'))
 
+	def get_context_data(self, **kwargs):
+		context = super(ProfileUpdate, self).get_context_data(**kwargs)
+		slug =None
+		ids=[]
+		if request.user.is_authenticated:
+			slug = request.user.slug
+			voted_users = Voters.objects.filter(voter = request.user)
+			for vote in voted_users:
+				ids.append(vote.post.id)
+		context['ids'] = ids
+		return context 
+
 def TagUserView(request, tag_name):
 	users = Tag.objects.get(name=tag_name).profile_set
 	orgs = Tag.objects.get(name=tag_name).organization_set

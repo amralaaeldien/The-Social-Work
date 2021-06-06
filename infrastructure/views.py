@@ -108,7 +108,8 @@ class ProfileDetail(DetailView):
 		return Profile.objects.get(slug = self.kwargs.get('slug'))
 
 	def get_context_data(self, **kwargs):
-		context = super(ProfileUpdate, self).get_context_data(**kwargs)
+		context = super(ProfileDetail, self).get_context_data(**kwargs)
+		request = self.request
 		slug =None
 		ids=[]
 		if request.user.is_authenticated:

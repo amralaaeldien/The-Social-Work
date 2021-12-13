@@ -1,10 +1,15 @@
-from django.urls import path
+from django.urls import path, include
 
 from . import forms
 from . import views
 app_name = 'infrastructure'
 urlpatterns = [
 	path('', views.results, name='index' ),
+	path('accounts/', include('django.contrib.auth.urls')),
+	path("register", views.register, name="register"),
+	path('about', views.about, name='about'),
+	path('posts_guide', views.posts_guide, name='posts-guide'),
+	path('comments_guide', views.comments_guide, name='comments-guide'),
 	path('accounts/edit/<slug>/', views.ProfileUpdate.as_view(), name='edit-user-profile' ),
 	path('accounts/<slug>/', views.ProfileDetail.as_view(), name='display-profile' ),
 	path('accounts/<slug>/orgs', views.UserOrgsView, name='user-orgs-view' ),

@@ -13,6 +13,10 @@ from django.urls import reverse
 from .forms import TagForm
 from django.db.models import Q
 
+from django.shortcuts import  render, redirect
+from .forms import NewUserForm
+from django.contrib.auth import login
+from django.contrib import messages
 
 def results(request):
 	ids = []
@@ -25,6 +29,27 @@ def results(request):
 	user_posts = Post.objects.all().exclude(publisher_user__isnull = True)
 	org_posts = Post.objects.all().exclude(publisher_org__isnull=True)
 	return render(request, 'index.html', {'ids' : ids,'slug' : slug, 'user_posts': user_posts, 'org_posts': org_posts})
+
+def register(request):
+	if request.method == "POST":
+		form = NewUserForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			messages.success(request, "Registration successful." )
+			return redirect("infrastructure:index")
+		messages.error(request, "Unsuccessful registration. Invalid information.")
+	form = NewUserForm()
+	return render (request=request, template_name="register.html", context={"register_form":form})
+
+def about(request):
+	return render(request, 'about.html')
+
+def comments_guide(request):
+	return render(request, 'comments_guide.html')
+
+def posts_guide(request):
+	return render(request, 'posts_guide.html')
 
 def OrderingByTime(request):
 	slug = None

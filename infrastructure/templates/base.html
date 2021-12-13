@@ -34,6 +34,23 @@
 	<h1>
 		<a href="{% url 'infrastructure:index'%}"> Index </a>
 	</h1>
+	<h1>
+		<a href="{% url 'infrastructure:about'%}">About</a>
+	</h1>
+	{%if not request.user.is_authenticated %}
+	<h1>
+		<a href="{% url 'infrastructure:login' %}">Log In</a>
+	</h1>
+	<h1>
+		<a href="{% url 'infrastructure:register' %}">Register</a>
+	</h1>
+	{%else%}
+	<h1>
+		<a href="{% url 'infrastructure:logout' %}">Log Out</a>
+	</h1>
+
+	{%endif%}
+
 <hr>
 {%block content%}
 {%endblock%}

@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from . import models
+from django.contrib.auth.forms import UserCreationForm
 '''
 class ProfileForm(ModelForm):
 	class Meta:
@@ -36,3 +37,17 @@ class TagForm(ModelForm):
 		#instance = forms.ModelForm.save(self, False)
 		#instance.topping_set.add(*self.cleaned_data['subject_tag'])
 		#return instance
+
+class NewUserForm(UserCreationForm):
+	email = forms.EmailField(required=True)
+
+	class Meta:
+		model = models.Profile
+		fields = ("username", "email", "password1", "password2")
+
+	def save(self, commit=True):
+		user = super(NewUserForm, self).save(commit=False)
+		user.email = self.cleaned_data['email']
+		if commit:
+			user.save()
+		return user

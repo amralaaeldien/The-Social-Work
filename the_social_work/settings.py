@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
 '0.0.0.0',
-'http://help-er2.herokuapp.com/'
+'help-er2.herokuapp.com/'
 ]
 
 

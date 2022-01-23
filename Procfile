@@ -1,1 +1,1 @@
-web: gunicorn the_social_work.wsgi:infrastructure
+web: gunicorn the_social_work.wsgi

@@ -1,1 +1,1 @@
-web: gunicorn path/of/yourwsgit/file.wsgi
+web: gunicorn the_social_work.wsgi

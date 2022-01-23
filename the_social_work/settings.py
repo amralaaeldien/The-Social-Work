@@ -91,7 +91,7 @@ DATABASES = {
         'USER': 'myuser',
         'PASSWORD': 'password',
         'HOST': 'help-er2.herokuapp.com',                      # Empty for localhost through domain sockets or           '127.0.0.1' for localhost through TCP.
-        'PORT': srt($PORT),                      # Set to empty string for default.
+        'PORT': $PORT,                      # Set to empty string for default.
     }
 }
 

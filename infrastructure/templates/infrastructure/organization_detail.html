@@ -1,5 +1,6 @@
 {%extends 'base.html'%}
 {%block content%}
+
 <img src="{{ object.avatar_thumbnail.url }}" >
 
 {% if request.user in object.moderators.all %}

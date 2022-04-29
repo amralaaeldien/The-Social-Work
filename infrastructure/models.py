@@ -61,7 +61,7 @@ class Organization(models.Model):
 	bio = models.TextField()
 	avatar_thumbnail = ProcessedImageField(upload_to='images/',
 											default='/images/default2.png',
-                                           processors=[ResizeToFill(100, 50)],
+                                           processors=[ResizeToFill(300, 300)],
                                            format='JPEG',
                                            options={'quality': 60})
 	location = models.TextField()

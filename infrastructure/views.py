@@ -101,6 +101,10 @@ class ProfileUpdate(UpdateView):
 	def get_queryset(self):
 		base_qs = super(ProfileUpdate, self).get_queryset()
 		return base_qs.filter(username=self.request.user.username)
+	
+	def post(self, request, *args, **kwargs):
+		print(request.FILES)
+		return super().post(request, *args, **kwargs)
 
 class OrganizationUpdate(UpdateView):
 	model = Organization
@@ -124,6 +128,11 @@ class OrganizationUpdate(UpdateView):
 		self.object = form.save()
 		self.object.save()
 		return super().form_valid(form)
+
+	def post(self, request, *args, **kwargs):
+		#print(request.POST['avatar_thumbnail'])
+		print(request.FILES)
+		return super().post(request, *args, **kwargs)
 
 
 class ProfileDetail(DetailView):

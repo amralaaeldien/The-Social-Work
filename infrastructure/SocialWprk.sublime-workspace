@@ -148,38 +148,18 @@
 	"buffers":
 	[
 		{
-			"file": "infrastructure/models.py",
+			"file": "/home/amrshedou/Downloads/Courses/Design Patterns in Python/[TutsNode.com] - Design Patterns in Python/3. Builder/3.1 builder.py.py",
 			"settings":
 			{
-				"buffer_size": 535,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "infrastructure/signals.py",
-			"settings":
-			{
-				"buffer_size": 417,
-				"encoding": "UTF-8",
+				"buffer_size": 2015,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "infrastructure/apps.py",
+			"file": "/home/amrshedou/Downloads/Courses/Design Patterns in Python/[TutsNode.com] - Design Patterns in Python/3. Builder/7.1 exercise.py.py",
 			"settings":
 			{
-				"buffer_size": 150,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "infrastructure/__init__.py",
-			"settings":
-			{
-				"buffer_size": 63,
-				"encoding": "UTF-8",
+				"buffer_size": 1444,
 				"line_ending": "Windows"
 			}
 		}
@@ -195,6 +175,18 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"Pyh",
+				"Set Syntax: Python"
+			],
+			[
+				"Djan",
+				"Set Syntax: Django HTML"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
 			[
 				"dja",
 				"Set Syntax: HTML (Django)"
@@ -228,6 +220,8 @@
 	},
 	"file_history":
 	[
+		"/home/amrshedou/Downloads/Courses/The Complete Data Structures and Algorithms Course in Python/[TutsNode.com] - The Complete Data Structures and Algorithms Course in Python/1. Introduction/2. What are Data Structures.srt",
+		"/home/amrshedou/Downloads/The-Social-Work-master/infrastructure/admin.py",
 		"/F/Desktop/PIM/products_and_categories/models.py",
 		"/F/Desktop/json.json",
 		"/F/Desktop/PIM/products_and_categories/serializers.py",
@@ -353,9 +347,7 @@
 		"/C/Users/connect/AppData/Local/.meteor/packages/accounts-ui-unstyled/1.3.0/web.browser/login_buttons.import.less",
 		"/C/Users/connect/AppData/Local/.meteor/package-metadata/v2.0.1/packages.data.db",
 		"/C/Users/connect/Desktop/test coming back/help-er/package-lock.json",
-		"/C/Users/connect/OneDrive/Pictures/Tota/Ana L'error.html",
-		"/C/Users/connect/Desktop/num/help-er/client/main.js",
-		"/C/Users/connect/Desktop/project/myapp/.meteor/packages"
+		"/C/Users/connect/OneDrive/Pictures/Tota/Ana L'error.html"
 	],
 	"find":
 	{
@@ -382,131 +374,79 @@
 		[
 		],
 		"reverse": false,
+		"scrollbar_highlights": true,
 		"show_context": true,
 		"use_buffer2": true,
+		"use_gitignore": true,
 		"whole_word": false,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "infrastructure/models.py",
+					"file": "/home/amrshedou/Downloads/Courses/Design Patterns in Python/[TutsNode.com] - Design Patterns in Python/3. Builder/3.1 builder.py.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 535,
+						"buffer_size": 2015,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								102,
-								102
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 591.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"stack_multiselect": false,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/amrshedou/Downloads/Courses/Design Patterns in Python/[TutsNode.com] - Design Patterns in Python/3. Builder/7.1 exercise.py.py",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1444,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "infrastructure/signals.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 417,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								256,
-								256
-							]
-						],
-						"settings":
-						{
-							"auto_name": "",
-							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "infrastructure/apps.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 150,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								42,
-								62
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "infrastructure/__init__.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 63,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								62,
-								62
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Djaneiro/Syntaxes/Python Django.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
+					"stack_multiselect": false,
 					"type": "text"
 				}
 			]
@@ -548,7 +488,7 @@
 		"height": 0.0
 	},
 	"pinned_build_system": "",
-	"project": "the-social-work.sublime-project",
+	"project": "SocialWprk.sublime-project",
 	"replace":
 	{
 		"height": 340.0

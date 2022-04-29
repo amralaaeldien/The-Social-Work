@@ -15,7 +15,7 @@ colorama==0.4.3
 command-not-found==0.3
 coreapi==2.3.3
 coreschema==0.0.4
-cryptography==2.8
+cryptography==3.3.2
 cupshelpers==1.0
 dbus-python==1.2.16
 defer==1.0.6

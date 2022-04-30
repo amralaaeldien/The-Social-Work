@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import CharField, ModelForm
 from django import forms
 from . import models
 from django.contrib.auth.forms import UserCreationForm
@@ -14,6 +14,29 @@ class ProfileForm(ModelForm):
 			'contact_information'
 		]
 '''  
+
+import re
+
+def valid_hashtag(value):
+	values = value.split(' ')
+	for value in values:
+		if not re.match(r'\B(\#[a-zA-Z]+\b)(?!;)', value) :
+			raise forms.ValidationError("Name should begin with #")
+
+
+class OrganizationForm(ModelForm):
+	#tags1 = CharField(help_text='Add a tag like #Backend_dev and separete tags with a space')
+
+	class Meta:
+		model= models.Organization
+		fields = [
+			'name',
+			'slug',
+			'bio',
+			'avatar_thumbnail',
+			'location',
+			'contact_information',
+		]
 
 class TagForm(ModelForm):
 	class Meta:

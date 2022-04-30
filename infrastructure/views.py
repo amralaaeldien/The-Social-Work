@@ -6,8 +6,10 @@ from .models import Profile
 from django.core import exceptions
 from django.http import HttpResponse, HttpResponseRedirect
 
+import re
+from . import forms
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .models import Profile, Tag, Organization, Post, Comment, Voters
+from .models import Profile, Tag, Organization, Post, Comment, Voters, SubjectTag
 from django.views.generic.detail import DetailView
 from django.urls import reverse
 from .forms import TagForm
@@ -18,6 +20,9 @@ from .forms import NewUserForm
 from django.contrib.auth import login
 from django.contrib import messages
 
+from infrastructure import forms
+
+post = None
 def results(request):
 	ids = []
 	slug = None
@@ -83,7 +88,6 @@ class ProfileUpdate(UpdateView):
 		'bio',
 		'avatar_thumbnail',
 		'location',
-		'tags',
 		'contact_information'
 		]
 
@@ -93,9 +97,36 @@ class ProfileUpdate(UpdateView):
 			raise exceptions.PermissionDenied()
 		return obj
 
+	def get_success_url(self):
+		user = self.get_object()
+		POST = self.request.POST.copy()
+
+		choice_tags = POST.getlist('tags2')
+		tags = []
+		for tag in choice_tags:
+			tag_obj = Tag.objects.get(name = tag)
+			tags.append(tag_obj)
+
+		text_input_tags = POST.getlist('tags1')[0]
+		text_input_tags = text_input_tags.strip()
+		text_inputs_tags = text_input_tags.split(' ')
+		for tag in text_inputs_tags:
+			if tag != '':
+				if not tag.startswith('#') :
+					tag = '#' + tag
+				tag_obj = Tag.objects.get_or_create(name = tag)[0]	
+				tag_obj.save()
+				tags.append(tag_obj)
+
+		user.tags.set(tags)
+
+		return super().get_success_url()
+
+
 	def get_context_data(self, **kwargs):
 		context = super(ProfileUpdate, self).get_context_data(**kwargs)
-		context['tag_form'] = TagForm
+		subject_tags = SubjectTag.objects.all()
+		context['subject_tags'] =  subject_tags
 		return context 
 	
 	def get_queryset(self):
@@ -108,7 +139,7 @@ class ProfileUpdate(UpdateView):
 
 class OrganizationUpdate(UpdateView):
 	model = Organization
-	fields = [
+	'''fields = [
 		'name',
 		'slug',
 		'bio',
@@ -116,7 +147,10 @@ class OrganizationUpdate(UpdateView):
 		'location',
 		'tags',
 		'contact_information'
-	]
+	]'
+	'''
+
+	form_class = forms.OrganizationForm
 
 	def get_object(self):
 		obj = Organization.objects.get(slug = self.kwargs.get('slug'))
@@ -124,15 +158,38 @@ class OrganizationUpdate(UpdateView):
 			raise exceptions.PermissionDenied()
 		return obj
 
-	def form_valid(self, form):
-		self.object = form.save()
-		self.object.save()
-		return super().form_valid(form)
+	def get_success_url(self):
 
-	def post(self, request, *args, **kwargs):
-		#print(request.POST['avatar_thumbnail'])
-		print(request.FILES)
-		return super().post(request, *args, **kwargs)
+		org = self.get_object()
+		POST = self.request.POST.copy()
+
+		choice_tags = POST.getlist('tags2')
+		tags = []
+		for tag in choice_tags:
+			tag_obj = Tag.objects.get(name = tag)
+			tags.append(tag_obj)
+
+		text_input_tags = POST.getlist('tags1')[0]
+		text_input_tags = text_input_tags.strip()
+		text_inputs_tags = text_input_tags.split(' ')
+		for tag in text_inputs_tags:
+			if tag != '':
+				if not tag.startswith('#') :
+					tag = '#' + tag
+				tag_obj = Tag.objects.get_or_create(name = tag)[0]	
+				tag_obj.save()
+				tags.append(tag_obj)
+
+		org.tags.set(tags)
+
+		return super().get_success_url()
+
+	def get_context_data(self, **kwargs):
+		context = {}
+		subject_tags = SubjectTag.objects.all()
+		context['subject_tags'] =  subject_tags
+		context.update(kwargs)
+		return super().get_context_data(**context)
 
 
 class ProfileDetail(DetailView):

@@ -1,3 +1,4 @@
+#from typing_extensions import Required
 from django.db import models
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
@@ -9,14 +10,14 @@ from django.contrib.auth.models import UserManager
 from django.contrib.auth.models import AbstractUser
 
 class Tag(models.Model):
-	name = models.TextField()
+	name = models.TextField(primary_key=True)
 	verified = models.BooleanField(default=False)
 
 	def __str__(self):
 		return self.name
 
 class SubjectTag(models.Model):
-	name = models.TextField()
+	name = models.TextField(primary_key=True)
 	verified = models.BooleanField(default=False)
 	tags = models.ManyToManyField(Tag, related_name='subject_tag')
 	def __str__(self):
@@ -33,7 +34,7 @@ class Profile(AbstractUser):
                                            format='JPEG',
                                            options={'quality': 60})
 	location = models.TextField()
-	tags = models.ManyToManyField(Tag)
+	tags = models.ManyToManyField(Tag, null=True)
 	contact_information = models.TextField()
 	verified = models.BooleanField(default=False)
 
@@ -65,7 +66,7 @@ class Organization(models.Model):
                                            format='JPEG',
                                            options={'quality': 60})
 	location = models.TextField()
-	tags = models.ManyToManyField(Tag)
+	tags = models.ManyToManyField(Tag, null=True)
 	contact_information = models.TextField()
 	verified = models.BooleanField(default=False)
 	

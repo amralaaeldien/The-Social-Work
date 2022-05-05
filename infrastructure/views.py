@@ -227,7 +227,6 @@ class OrganizationCreate(CreateView):
 		'bio',
 		'avatar_thumbnail',
 		'location',
-		'tags',
 		'contact_information',
 	]
 

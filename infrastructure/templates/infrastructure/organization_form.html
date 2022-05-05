@@ -11,7 +11,7 @@
 		and seperate between them with spaces or both!
 	</p>
 	<label for="tags" >Written Tags</label>
-	<input value="{% for tag in form.instance.tags.all %}{% if not tag.verified_%} {{tag.name}}{%endif%}{%endfor%}" type="text" name="tags1" id="tags" placeholder="Add a tag like #Backend_dev and separete tags with a space">
+	<input value="{% if form.instace %}{% for tag in form.instance.tags.all %}{% if not tag.verified_%} {{tag.name}}{%endif%}{%endfor%}{%endif%}" type="text" name="tags1" id="tags" placeholder="Add a tag like #Backend_dev and separete tags with a space">
 	<br><br>
 	<label for="tagss">Multiple Choice Tags</label>
     <select name="tags2" multiple id="tagss" >

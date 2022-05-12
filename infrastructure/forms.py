@@ -2,18 +2,6 @@ from django.forms import CharField, ModelForm
 from django import forms
 from . import models
 from django.contrib.auth.forms import UserCreationForm
-'''
-class ProfileForm(ModelForm):
-	class Meta:
-		model = models.Profile
-		fields= [
-			'bio',
-			'avatar_thumbnail',
-			'location',
-			'tags',
-			'contact_information'
-		]
-'''  
 
 import re
 
@@ -23,9 +11,16 @@ def valid_hashtag(value):
 		if not re.match(r'\B(\#[a-zA-Z]+\b)(?!;)', value) :
 			raise forms.ValidationError("Name should begin with #")
 
+class PostForm(ModelForm):
+	class Meta:
+		model = models.Post
+		fields = [
+			'content',
+			'post_type',
+			'is_urgent',	
+		]
 
 class OrganizationForm(ModelForm):
-	#tags1 = CharField(help_text='Add a tag like #Backend_dev and separete tags with a space')
 
 	class Meta:
 		model= models.Organization
@@ -51,15 +46,6 @@ class TagForm(ModelForm):
 			initial['subject_tag'] = [t.pk for t in kwargs['instance'].subject_tag_set.all()]
 		return forms.ModelForm.__init__(self, *args, **kwargs)
 		
-
-	def save(self):
-		#from .views import ProfileUpdate
-		print('hellloo')
-		pass
-		print('hello')
-		#instance = forms.ModelForm.save(self, False)
-		#instance.topping_set.add(*self.cleaned_data['subject_tag'])
-		#return instance
 
 class NewUserForm(UserCreationForm):
 	email = forms.EmailField(required=True)

@@ -1,8 +1,6 @@
 from django.shortcuts import render
-#from .forms import ProfileForm
 from .models import Profile
 # Create your views here.
-#from .forms import SubjectTagForm
 from django.core import exceptions
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -12,7 +10,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Profile, Tag, Organization, Post, Comment, Voters, SubjectTag
 from django.views.generic.detail import DetailView
 from django.urls import reverse
-from .forms import TagForm
+from .forms import PostForm, TagForm
 from django.db.models import Q
 
 from django.shortcuts import  render, redirect
@@ -21,20 +19,57 @@ from django.contrib.auth import login
 from django.contrib import messages
 
 from infrastructure import forms
+from django.db.models import Q
 
-post = None
 def results(request):
+
+	needer = 'n'
+	highest= 'h'
+	needer_or_helper = request.GET.get('needer_or_helper', needer)
+	highest_or_recent = request.GET.get('highest_or_recent', highest)
+
+	if (needer_or_helper == needer):
+		if (highest_or_recent == highest):
+			urgent_posts = Post.objects.filter(post_type=needer_or_helper, is_urgent = True).order_by('-votes')
+			nonurgent_posts = Post.objects.filter(post_type=needer_or_helper, is_urgent = False).order_by('-votes')
+		else:
+			urgent_posts = Post.objects.filter(post_type=needer_or_helper, is_urgent = True).order_by('-created_at')
+			nonurgent_posts = Post.objects.filter(post_type=needer_or_helper, is_urgent = False).order_by('-created_at')
+	else:
+		if (highest_or_recent == highest):
+			urgent_posts = None
+			nonurgent_posts = Post.objects.filter(post_type=needer_or_helper).order_by('-votes')
+
+		else:
+			urgent_posts= None
+			nonurgent_posts = Post.objects.filter(post_type=needer_or_helper).order_by('-created_at')
+
+	ids = []
+	if request.user.is_authenticated:
+		#Getting the ids of all the posts the current user has upvoted
+		voted_users = Voters.objects.filter(voter = request.user)
+		for vote in voted_users:
+			#sending the ids of the upvoted posts to template to choose when to render upvote
+			#and when to render unvote
+			ids.append(vote.post.id)
+	
+	return render(request, 'index.html', {'ids': ids, 'urgent_posts': urgent_posts, 'nonurgent_posts': nonurgent_posts, 'needer_or_helper': needer_or_helper, 'highest_or_recent': highest_or_recent})
+		
+	'''
 	ids = []
 	slug = None
 	if request.user.is_authenticated:
 		slug = request.user.slug
+		#Getting the ids of all the posts the current user has upvoted
 		voted_users = Voters.objects.filter(voter = request.user)
 		for vote in voted_users:
+			#sending the ids of the upvoted posts to template to choose when to render upvote
+			#and when to render unvote
 			ids.append(vote.post.id)		
 	user_posts = Post.objects.all().exclude(publisher_user__isnull = True)
 	org_posts = Post.objects.all().exclude(publisher_org__isnull=True)
 	return render(request, 'index.html', {'ids' : ids,'slug' : slug, 'user_posts': user_posts, 'org_posts': org_posts})
-
+	'''
 def register(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
@@ -102,10 +137,10 @@ class ProfileUpdate(UpdateView):
 		POST = self.request.POST.copy()
 
 		choice_tags = POST.getlist('tags2')
-		tags = []
+		tags = set()
 		for tag in choice_tags:
 			tag_obj = Tag.objects.get(name = tag)
-			tags.append(tag_obj)
+			tags.add(tag_obj)
 
 		text_input_tags = POST.getlist('tags1')[0]
 		text_input_tags = text_input_tags.strip()
@@ -114,9 +149,9 @@ class ProfileUpdate(UpdateView):
 			if tag != '':
 				if not tag.startswith('#') :
 					tag = '#' + tag
-				tag_obj = Tag.objects.get_or_create(name = tag)[0]	
+				tag_obj = Tag.objects.get_or_create(name = tag, verified=False)[0]	
 				tag_obj.save()
-				tags.append(tag_obj)
+				tags.add(tag_obj)
 
 		user.tags.set(tags)
 
@@ -139,17 +174,6 @@ class ProfileUpdate(UpdateView):
 
 class OrganizationUpdate(UpdateView):
 	model = Organization
-	'''fields = [
-		'name',
-		'slug',
-		'bio',
-		'avatar_thumbnail',
-		'location',
-		'tags',
-		'contact_information'
-	]'
-	'''
-
 	form_class = forms.OrganizationForm
 
 	def get_object(self):
@@ -164,10 +188,10 @@ class OrganizationUpdate(UpdateView):
 		POST = self.request.POST.copy()
 
 		choice_tags = POST.getlist('tags2')
-		tags = []
+		tags = set()
 		for tag in choice_tags:
 			tag_obj = Tag.objects.get(name = tag)
-			tags.append(tag_obj)
+			tags.add(tag_obj)
 
 		text_input_tags = POST.getlist('tags1')[0]
 		text_input_tags = text_input_tags.strip()
@@ -178,7 +202,7 @@ class OrganizationUpdate(UpdateView):
 					tag = '#' + tag
 				tag_obj = Tag.objects.get_or_create(name = tag)[0]	
 				tag_obj.save()
-				tags.append(tag_obj)
+				tags.add(tag_obj)
 
 		org.tags.set(tags)
 
@@ -191,9 +215,11 @@ class OrganizationUpdate(UpdateView):
 		context.update(kwargs)
 		return super().get_context_data(**context)
 
+from django.views.generic.edit import FormView
 
-class ProfileDetail(DetailView):
+class ProfileDetail(DetailView, FormView):
 	model = Profile
+	form_class = PostForm
 
 	def get_object(self):
 		return Profile.objects.get(slug = self.kwargs.get('slug'))
@@ -201,15 +227,14 @@ class ProfileDetail(DetailView):
 	def get_context_data(self, **kwargs):
 		context = super(ProfileDetail, self).get_context_data(**kwargs)
 		request = self.request
-		slug =None
 		ids=[]
 		if request.user.is_authenticated:
-			slug = request.user.slug
 			voted_users = Voters.objects.filter(voter = request.user)
 			for vote in voted_users:
 				ids.append(vote.post.id)
 		context['ids'] = ids
-		return context 
+
+		return context
 
 def TagUserView(request, tag_name):
 	users = Tag.objects.get(name=tag_name).profile_set
@@ -236,28 +261,37 @@ class OrganizationCreate(CreateView):
 		form.instance.moderators.add(my_p)
 		return super().form_valid(form)
 
-	#def get_object(self):
-	#	return Organization.objects.get(pk = self.kwargs.get('org_pk'))
 
 class OrganizationDetail(DetailView):
 	model = Organization
 
+	def get_context_data(self, **kwargs) :
+		context = super().get_context_data(**kwargs)
+		context['form'] = PostForm
+		return context
+
 def UserOrgsView(request, slug):
 	orgs = Profile.objects.get(slug=slug).organization_set
-	print('heeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeey')
-	print(Profile.objects.get(slug=slug).organization_set)
 	return render(request, 'user_orgs.html', { 'orgs' : orgs})
 
-def PublishPostView(request, slug):
-	content = request.POST.get("text")
-	path = request.get_full_path()
-	if 'publish_post/user/' in path :
-		Post.objects.create(content=content, publisher_user=request.user)
-		return HttpResponseRedirect(reverse('infrastructure:display-profile', args=(slug,)))
-	else :
-		publisher_org = Organization.objects.get(slug = slug)
-		Post.objects.create(content=content, publisher_org=publisher_org)
-		return HttpResponseRedirect(reverse('infrastructure:org-detail', args=(slug,)))
+
+class PostCreate(CreateView):
+	from .forms import PostForm
+	model = Post
+	form_class = PostForm
+	template_name ='profile_detail.html'
+
+	def form_valid(self, form):
+		post = form.instance
+		path = self.request.get_full_path()
+		if 'publish_post/user/' in path :
+			post.publisher_user= self.request.user
+			post.save()
+		else :
+			slug = self.kwargs.get('slug', None)
+			publisher_org = Organization.objects.get(slug = slug)
+			post.publisher_org= publisher_org
+		return super().form_valid(form)
 
 def PostView(request, id):
 	post = Post.objects.get(id=id)
@@ -282,8 +316,6 @@ def CommentsCreation(request, id):
 	Comment.objects.create(content = request.POST.get('comment'), publisher_user=request.user, post = post)
 	return HttpResponseRedirect(reverse('infrastructure:post-detail', args=(post.id,)))
 
-
-
 def PostUpView(request, id):
 	post = Post.objects.get(id = id)
 	users = Voters.objects.filter(post = post)
@@ -304,8 +336,6 @@ def PostUpView(request, id):
 	previous_url = request.META.get('HTTP_REFERER')
 
 	return HttpResponseRedirect(previous_url)
-
-
 
 def PostUnvoteView(request, id):
 

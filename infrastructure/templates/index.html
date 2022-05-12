@@ -1,6 +1,82 @@
 {%extends 'base.html'%}
 
 {%block content%}
+
+<form method="get">
+<div>Select the type of posts to show :</div>
+<div>The "needer" will show posts of needers or people who need help.</div>
+<div>the "helper" will show posts of helpers or people who offer help.</div>
+<select name="needer_or_helper" id = 'type_post'>
+	<option value="n"
+		{% if needer_or_helper == 'n'%}
+			selected
+		{%endif%}
+	> needer </option>
+	<option value="h"
+		{% if needer_or_helper == 'h'%}
+			selected
+		{%endif%}
+	> helper </option>
+</select>
+and
+<select name="highest_or_recent">
+	<option value="h"
+		{% if highest_or_recent == 'h'%}
+			selected
+		{%endif%}
+	> Highest Votes </option>
+	<option value="r"
+		{% if highest_or_recent == 'r'%}
+			selected
+		{%endif%}
+	> Most Recent </option>
+</select>
+<input type="submit" value="Apply">
+</form>
+<br>
+<h1>.:Posts:.</h1>
+<br>
+{% if urgent_posts %}
+<h2>Urgent Posts</h2>
+	{% for post in urgent_posts %}
+		{%if request.user.is_authenticated%}
+			{%if post.id not in ids%}
+					<a href="{%url 'infrastructure:upvote' id=post.id%}">Up vote ({{post.get_votes}})</a>
+			{%else%}
+					<a href="{%url 'infrastructure:unvote' id=post.id%}">Unvote ({{post.get_votes}})</a>
+			{%endif%}
+		{%endif%}
+		"<a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}</a>" 
+		by 
+		{% if post.publisher_user.slug %}
+			<a href="{%url 'infrastructure:display-profile' slug=post.publisher_user.slug%}">{{post.publisher_user.slug}}</a>
+		{%else%}
+			<a href="{%url 'infrastructure:org-detail' slug=post.publisher_org.slug%}">{{post.publisher_org.name}}</a>
+		{%endif%}
+		<br>
+		<br>
+	{%endfor%}
+{%endif%}
+<br>
+<br>
+<h2>Non-urgent Posts</h2>
+{%for post in nonurgent_posts%}
+	{%if request.user.is_authenticated%}
+		{%if post.id not in ids%}
+				<a href="{%url 'infrastructure:upvote' id=post.id%}">Up vote ({{post.get_votes}})</a>
+		{%else%}
+				<a href="{%url 'infrastructure:unvote' id=post.id%}">Unvote ({{post.get_votes}})</a>
+		{%endif%}
+	{%endif%}
+	{% if post.publisher_user.slug %}
+		<a href="{%url 'infrastructure:display-profile' slug=post.publisher_user.slug%}">{{post.publisher_user.slug}}</a>
+	{%else%}
+		<a href="{%url 'infrastructure:org-detail' slug=post.publisher_org.slug%}">{{post.publisher_org.name}}</a>
+	{%endif%}
+	<br>
+	<br>
+{%endfor%}
+<!--
 <h1>
 <a href="{%url 'infrastructure:order-by-time'%}">Recent posts</a> ||
 <a href="{%url 'infrastructure:order-by-votes'%}">Highest votes</a>
@@ -43,4 +119,5 @@
 		<br>
 	{%endfor%}
 </h3>
+-->
 {%endblock%}

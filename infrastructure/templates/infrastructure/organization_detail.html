@@ -31,8 +31,14 @@
 {%if request.user in object.moderators.all %}
 	<form id='form1' method="post" action="{% url 'infrastructure:publish-post-org' slug=object.slug %}">
 	{% csrf_token %}
-		<input type="text" name='text'>
-		<input type="submit" name="submit">
+	<p>{{form.content.label}}: {{form.content}}</p>
+	<p>You can specify the type of your post from the dropdown menu below.</p>
+	<p>You should select "needer" if your post contains a call/need for help from others.</p>
+	<p>You should select "helper" if your post contains an offer of help to others.</p>
+	<p>{{form.post_type.label}}: {{form.post_type}}</p>
+	<p>Please specify if your call for help is urgent (ideally you need it resolved in the next few hours)!</p>
+	<p>{{form.is_urgent.label}}: {{form.is_urgent}}</p>
+	<input type="submit" name="submit">
 	</form>
 {%endif%}
 <hr>

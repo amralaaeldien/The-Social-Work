@@ -68,6 +68,8 @@ and
 				<a href="{%url 'infrastructure:unvote' id=post.id%}">Unvote ({{post.get_votes}})</a>
 		{%endif%}
 	{%endif%}
+	"<a href="{%url 'infrastructure:post-detail' id=post.id%}">{{post.content}}</a>"
+	by
 	{% if post.publisher_user.slug %}
 		<a href="{%url 'infrastructure:display-profile' slug=post.publisher_user.slug%}">{{post.publisher_user.slug}}</a>
 	{%else%}

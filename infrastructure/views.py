@@ -54,22 +54,7 @@ def results(request):
 			ids.append(vote.post.id)
 	
 	return render(request, 'index.html', {'ids': ids, 'urgent_posts': urgent_posts, 'nonurgent_posts': nonurgent_posts, 'needer_or_helper': needer_or_helper, 'highest_or_recent': highest_or_recent})
-		
-	'''
-	ids = []
-	slug = None
-	if request.user.is_authenticated:
-		slug = request.user.slug
-		#Getting the ids of all the posts the current user has upvoted
-		voted_users = Voters.objects.filter(voter = request.user)
-		for vote in voted_users:
-			#sending the ids of the upvoted posts to template to choose when to render upvote
-			#and when to render unvote
-			ids.append(vote.post.id)		
-	user_posts = Post.objects.all().exclude(publisher_user__isnull = True)
-	org_posts = Post.objects.all().exclude(publisher_org__isnull=True)
-	return render(request, 'index.html', {'ids' : ids,'slug' : slug, 'user_posts': user_posts, 'org_posts': org_posts})
-	'''
+
 def register(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
@@ -259,7 +244,35 @@ class OrganizationCreate(CreateView):
 		form.instance.save()
 		my_p = Profile.objects.get(username=self.request.user.username)
 		form.instance.moderators.add(my_p)
+
+		org = form.instance
+		POST = self.request.POST.copy()
+
+		choice_tags = POST.getlist('tags2')
+		tags = set()
+		for tag in choice_tags:
+			tag_obj = Tag.objects.get(name = tag)
+			tags.add(tag_obj)
+
+		text_input_tags = POST.getlist('tags1')[0]
+		text_input_tags = text_input_tags.strip()
+		text_inputs_tags = text_input_tags.split(' ')
+		for tag in text_inputs_tags:
+			if tag != '':
+				if not tag.startswith('#') :
+					tag = '#' + tag
+				tag_obj = Tag.objects.get_or_create(name = tag)[0]	
+				tag_obj.save()
+				tags.add(tag_obj)
+		org.tags.set(tags)
 		return super().form_valid(form)
+
+	def get_context_data(self, **kwargs):
+		context = {}
+		subject_tags = SubjectTag.objects.all()
+		context['subject_tags'] =  subject_tags
+		context.update(kwargs)
+		return super().get_context_data(**context)
 
 
 class OrganizationDetail(DetailView):

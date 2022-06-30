@@ -10,14 +10,14 @@ from django.contrib.auth.models import UserManager
 from django.contrib.auth.models import AbstractUser
 
 class Tag(models.Model):
-	name = models.TextField(primary_key=True)
+	name = models.TextField(unique=True)
 	verified = models.BooleanField(default=True)
 
 	def __str__(self):
 		return self.name
 
 class SubjectTag(models.Model):
-	name = models.TextField(primary_key=True)
+	name = models.TextField(unique=True)
 	verified = models.BooleanField(default=True)
 	tags = models.ManyToManyField(Tag, related_name='subject_tag')
 	def __str__(self):

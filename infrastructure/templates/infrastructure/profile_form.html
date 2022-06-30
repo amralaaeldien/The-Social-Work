@@ -5,10 +5,10 @@ body  {
   text-align: center;
   vertical-align: middle;
  }
-p * { vertical-align: middle; 
+p * { 
+	vertical-align: middle; 
 	font-size : 20px ;
 }​ 
-
 </style>
 <form method="post" enctype="multipart/form-data">
 	<h3>Your Picture</h3>
@@ -39,7 +39,7 @@ p * { vertical-align: middle;
 		and seperate between them with spaces or both!
 	</p>
 	<label for="tags" >Written Tags</label>
-	<input value="{% for tag in form.instance.tags.all %}{% if not tag.verified_%} {{tag.name}}{%endif%}{%endfor%}" type="text" name="tags1" id="tags" placeholder="Add a tag like #Backend_dev and separete tags with a space">
+	<input value="{% for tag in form.instance.tags.all %}{% if not tag.verified %} {{tag.name}}{%endif%}{%endfor%}" type="text" name="tags1" id="tags" placeholder="Add a tag like #Backend_dev and separete tags with a space">
 	<br><br>
 	<label for="tagss">Multiple Choice Tags</label>
     <select name="tags2" multiple id="tagss" >

@@ -100,6 +100,26 @@ def OrderingByVotes(request):
 	org_posts = Post.objects.all().exclude(publisher_org__isnull=True).order_by('-votes')
 	return render(request, 'index.html', {'ids' : ids,'slug' : slug, 'user_posts': user_posts, 'org_posts': org_posts})
 
+def append_tags_to(user_or_org, POST):
+	choice_tags = POST.getlist('tags2')
+	tags = set()
+	for tag in choice_tags:
+		tag_obj = Tag.objects.get(name = tag)
+		tags.add(tag_obj)
+
+	text_input_tags = POST.getlist('tags1')[0]
+	text_input_tags = text_input_tags.strip()
+	text_inputs_tags = text_input_tags.split(' ')
+	for tag in text_inputs_tags:
+		if tag != '':
+			if not tag.startswith('#') :
+				tag = '#' + tag
+			tag_obj, created = Tag.objects.get_or_create(name = tag)
+			if created :
+				tag_obj.verified = False	
+			tag_obj.save()
+			tags.add(tag_obj)
+	user_or_org.tags.set(tags)
 
 class ProfileUpdate(UpdateView):
 	model = Profile
@@ -121,24 +141,7 @@ class ProfileUpdate(UpdateView):
 		user = self.get_object()
 		POST = self.request.POST.copy()
 
-		choice_tags = POST.getlist('tags2')
-		tags = set()
-		for tag in choice_tags:
-			tag_obj = Tag.objects.get(name = tag)
-			tags.add(tag_obj)
-
-		text_input_tags = POST.getlist('tags1')[0]
-		text_input_tags = text_input_tags.strip()
-		text_inputs_tags = text_input_tags.split(' ')
-		for tag in text_inputs_tags:
-			if tag != '':
-				if not tag.startswith('#') :
-					tag = '#' + tag
-				tag_obj = Tag.objects.get_or_create(name = tag, verified=False)[0]	
-				tag_obj.save()
-				tags.add(tag_obj)
-
-		user.tags.set(tags)
+		append_tags_to(user, POST)
 
 		return super().get_success_url()
 
@@ -147,6 +150,7 @@ class ProfileUpdate(UpdateView):
 		context = super(ProfileUpdate, self).get_context_data(**kwargs)
 		subject_tags = SubjectTag.objects.all()
 		context['subject_tags'] =  subject_tags
+		context['user'] = self.get_object()
 		return context 
 	
 	def get_queryset(self):
@@ -172,24 +176,7 @@ class OrganizationUpdate(UpdateView):
 		org = self.get_object()
 		POST = self.request.POST.copy()
 
-		choice_tags = POST.getlist('tags2')
-		tags = set()
-		for tag in choice_tags:
-			tag_obj = Tag.objects.get(name = tag)
-			tags.add(tag_obj)
-
-		text_input_tags = POST.getlist('tags1')[0]
-		text_input_tags = text_input_tags.strip()
-		text_inputs_tags = text_input_tags.split(' ')
-		for tag in text_inputs_tags:
-			if tag != '':
-				if not tag.startswith('#') :
-					tag = '#' + tag
-				tag_obj = Tag.objects.get_or_create(name = tag)[0]	
-				tag_obj.save()
-				tags.add(tag_obj)
-
-		org.tags.set(tags)
+		append_tags_to(org, POST)
 
 		return super().get_success_url()
 
@@ -197,6 +184,7 @@ class OrganizationUpdate(UpdateView):
 		context = {}
 		subject_tags = SubjectTag.objects.all()
 		context['subject_tags'] =  subject_tags
+		context['org'] = self.get_object()
 		context.update(kwargs)
 		return super().get_context_data(**context)
 
@@ -230,6 +218,7 @@ def TagsView(request):
 	tags = Tag.objects.filter(verified=True).all()
 	return render(request, 'tags.html', {'tags': tags})
 
+
 class OrganizationCreate(CreateView):
 	model = Organization
 	fields = [
@@ -248,23 +237,8 @@ class OrganizationCreate(CreateView):
 		org = form.instance
 		POST = self.request.POST.copy()
 
-		choice_tags = POST.getlist('tags2')
-		tags = set()
-		for tag in choice_tags:
-			tag_obj = Tag.objects.get(name = tag)
-			tags.add(tag_obj)
+		append_tags_to(org, POST)
 
-		text_input_tags = POST.getlist('tags1')[0]
-		text_input_tags = text_input_tags.strip()
-		text_inputs_tags = text_input_tags.split(' ')
-		for tag in text_inputs_tags:
-			if tag != '':
-				if not tag.startswith('#') :
-					tag = '#' + tag
-				tag_obj = Tag.objects.get_or_create(name = tag)[0]	
-				tag_obj.save()
-				tags.add(tag_obj)
-		org.tags.set(tags)
 		return super().form_valid(form)
 
 	def get_context_data(self, **kwargs):

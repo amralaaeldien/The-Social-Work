@@ -1,3 +1,7 @@
-# The-Social-Work
-You can check a live version of the website here
-https://help-er2.herokuapp.com/
+# Helper - مساعد
+A simple social network devoted to promoting and helping charitable work and charity organizations thrive by giving them functionalities that should help them achieve their goals easier and more efficiently.
+
+# Technologies
+* Python
+* Django
+

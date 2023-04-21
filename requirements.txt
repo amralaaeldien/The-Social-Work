@@ -13,6 +13,6 @@ Pillow==9.0.1
 psycopg2==2.9.3
 psycopg2-binary==2.9.3
 six==1.16.0
-sqlparse==0.4.2
+sqlparse==0.4.4
 static3==0.7.0
 whitenoise==5.3.0
